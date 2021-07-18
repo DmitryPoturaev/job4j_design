@@ -10,4 +10,12 @@ public class SimpleStack<T> {
     public void push(T value) {
         linked.addFirst(value);
     }
+
+    public boolean isEmpty() {
+        return linked.isEmpty();
+    }
+
+    public int size() {
+        return linked.size();
+    }
 }
