@@ -1,6 +1,8 @@
 package ru.job4j;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
     private String name;
@@ -14,5 +16,19 @@ public class User {
         this.name = name;
         this.children = children;
         this.birthday = birthday;
+    }
+
+    public static void main(String[] args) {
+        Calendar date = new Calendar.Builder()
+                .setDate(1990, 5, 15)
+                .build();
+        User first = new User("Ivan", 2, date);
+        User second = new User("Ivan", 2, date);
+        Map<User, Object> map = new HashMap<>();
+        map.put(first, new Object());
+        map.put(second, new Object());
+        for (var entry : map.entrySet()) {
+            System.out.println(entry);
+        }
     }
 }
