@@ -11,7 +11,7 @@ public class ResultFile {
                     String string = res + (res < 10 ? "  " : " ");
                     out.write(string.getBytes());
                 }
-                out.write("\n".getBytes());
+                out.write(System.lineSeparator().getBytes());
             }
         } catch (Exception e) {
             e.printStackTrace();
