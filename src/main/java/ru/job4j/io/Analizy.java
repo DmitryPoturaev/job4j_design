@@ -3,23 +3,22 @@ package ru.job4j.io;
 import java.io.*;
 
 public class Analizy {
-    private boolean badStatus;
 
     public void unavailable(String source, String target) {
         try (BufferedReader read = new BufferedReader(new FileReader(source));
              PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-            badStatus = false;
-            read.lines()
-                    .map(l -> l.split(" "))
-                    .filter(
-                            a -> a.length == 2
-                            && (!badStatus && Integer.parseInt(a[0]) > 300
-                            || badStatus && Integer.parseInt(a[0]) < 400)
-                    )
-                    .forEach(a -> {
+            boolean badStatus = false;
+            String line;
+            while ((line = read.readLine()) != null) {
+                String[] lines = line.split(" ");
+                if (lines.length == 2) {
+                    int status = Integer.parseInt(lines[0]);
+                    if (!badStatus && status > 300 || badStatus && status < 400) {
                         badStatus = !badStatus;
-                        out.printf("%s;%s", a[1], badStatus ? "" : System.lineSeparator());
-                    });
+                        out.printf("%s;%s", lines[1], badStatus ? "" : System.lineSeparator());
+                    }
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,6 +33,5 @@ public class Analizy {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
